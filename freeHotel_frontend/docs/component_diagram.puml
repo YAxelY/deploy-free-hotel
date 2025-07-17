@@ -1,0 +1,21 @@
+@startuml
+
+!theme vibrant
+
+title Diagramme de Composants - FreeHotel
+
+package "Client" {
+  [Navigateur Web] as WebBrowser
+}
+
+package "Serveur" {
+  [Frontend (React)] as Frontend
+  [Backend (Django)] as Backend
+  database "Database" as DB
+}
+
+WebBrowser -> Frontend : "Consulte les pages"
+Frontend -> Backend : "Appels API (REST)"
+Backend -> DB : "CRUD Operations"
+
+@enduml 

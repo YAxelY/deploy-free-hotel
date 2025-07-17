@@ -1,0 +1,62 @@
+@startuml
+
+!theme vibrant
+
+title Diagramme de Classes - Backend FreeHotel
+
+class User {
+  +username: varchar
+  +email: varchar
+  +is_hotel_owner: boolean
+  +is_active: boolean
+  +is_staff: boolean
+  +created_at: datetime
+}
+
+class HotelOwner {
+  +business_name: varchar
+  +contact_number: varchar
+}
+
+class Hotel {
+  +name: varchar
+  +location: varchar
+  +description: text
+  +rating: float
+  +amenities: json
+  +status: varchar
+  +domain_name: varchar
+  +seo_settings: json
+  +logo_text: varchar
+  +slogan: varchar
+  +footer_email: varchar
+  +footer_phone: varchar
+  +template_data: json
+  +published_at: datetime
+}
+
+class Room {
+  +room_number: varchar
+  +room_type: varchar
+  +price_per_night: decimal
+  +capacity: int
+  +is_available: boolean
+  +search_vector: json
+  +booking_count: int
+  +last_booking: datetime
+}
+
+class Reservation {
+  +status: varchar
+  +check_in: date
+  +check_out: date
+  +created_at: datetime
+}
+
+User "1" -- "1" HotelOwner : "is a"
+HotelOwner "1" -- "*" Hotel : "owns"
+Hotel "*" -- "*" Room : "contains"
+User "1" -- "*" Reservation : "makes"
+Room "1" -- "*" Reservation : "is for"
+
+@enduml 

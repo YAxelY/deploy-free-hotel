@@ -1,0 +1,200 @@
+:root {
+    --black: #333;
+    --grey: #767268;
+    --light-grey: #7d8da1;
+    --white: #fefefe;
+    --extra-light: #eff0f3;
+    --yellow: #ffdd00;
+    --blue: #0b3e66;
+    --light-blue: #379deb;
+    --max-width: 1200px;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.plan-section {
+    background: var(--extra-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 3rem 1rem;
+    margin-top: 64px;
+}
+
+.plan-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.plan-subtitle {
+    font-size: 1.1rem;
+    color: var(--grey);
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.plan-cards {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.plan-card {
+    background: var(--white);
+    border-radius: 1.5rem;
+    box-shadow: var(--box-shadow);
+    padding: 2.5rem 2rem 2rem 2rem;
+    min-width: 300px;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.plan-card.most-popular {
+    border: 2px solid var(--yellow);
+    z-index: 2;
+    transform: scale(1.05);
+}
+
+.plan-badge {
+    position: absolute;
+    top: -1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--yellow);
+    color: var(--black);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.3rem 1.2rem;
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+    letter-spacing: 1px;
+}
+
+.plan-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.plan-price {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 0.2rem;
+    text-align: center;
+}
+
+.plan-old-price {
+    font-size: 1rem;
+    color: var(--grey);
+    text-decoration: line-through;
+    margin-right: 0.5rem;
+}
+
+.plan-save {
+    color: var(--yellow);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.plan-desc {
+    color: var(--grey);
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    text-align: center;
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.plan-features li {
+    color: var(--black);
+    font-size: 1rem;
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.plan-features li .check {
+    color: var(--light-blue);
+    font-size: 1.1rem;
+}
+
+.plan-action {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 1000px) {
+    .plan-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+    }
+
+    .plan-card {
+        max-width: 400px;
+        width: 100%;
+    }
+}
+
+.editor-navbar {
+    min-width: 100vw;
+    background: var(--black);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 64px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.navbar-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.navbar-back {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.05rem;
+    margin-left: 1.5rem;
+    transition: color 0.2s;
+}
+
+.navbar-back:hover {
+    color: var(--yellow);
+}

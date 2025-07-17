@@ -1,0 +1,89 @@
+/* Modern, clean table styles for Hotel Plans */
+.hotel-plans-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+    padding: 2rem 2rem 1rem 2rem;
+}
+
+.hotel-plans-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #222;
+}
+
+.hotel-plans-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+.hotel-plans-table th,
+.hotel-plans-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+}
+
+.hotel-plans-table th {
+    background: #f5f7fa;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.hotel-plans-table td {
+    border-bottom: 1px solid #f0f0f0;
+    color: #444;
+}
+
+.hotel-name-row {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #1a4d8f;
+    padding-top: 1.5rem;
+}
+
+.hotel-plans-action-btn {
+    background: #1a4d8f;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: background 0.2s;
+}
+
+.hotel-plans-action-btn:hover {
+    background: #163a6b;
+}
+
+@media (max-width: 700px) {
+    .hotel-plans-container {
+        padding: 1rem 0.5rem;
+    }
+
+    .hotel-plans-table th,
+    .hotel-plans-table td {
+        padding: 0.5rem 0.3rem;
+        font-size: 0.95rem;
+    }
+
+    .hotel-plans-table {
+        font-size: 0.95rem;
+    }
+
+    .hotel-plans-title {
+        font-size: 1.3rem;
+    }
+
+    .hotel-plans-action-btn {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.7rem;
+    }
+}

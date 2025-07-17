@@ -1,0 +1,451 @@
+@startuml
+title "Séquence: Inscription d'un nouvel utilisateur (UC3)"
+
+actor Utilisateur
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+database "Database" as DB
+
+Utilisateur -> Browser : Remplit le formulaire d'inscription
+Browser -> Frontend : Envoie les données du formulaire
+activate Frontend
+Frontend -> Backend : POST /api/auth/register (email, password, ...)
+activate Backend
+Backend -> Backend : Valide les données
+Backend -> DB : Crée un nouvel utilisateur
+activate DB
+DB --> Backend : Confirme la création
+deactivate DB
+Backend --> Frontend : 201 Created (user data, token)
+deactivate Backend
+Frontend -> Frontend : Stocke le token (localStorage/cookie)
+Frontend --> Browser : Redirige vers la page de connexion / tableau de bord
+deactivate Frontend
+Browser --> Utilisateur : Affiche la page
+
+@enduml
+
+newpage
+
+@startuml
+title "Séquence: Connexion d'un utilisateur (UC4)"
+
+actor Utilisateur
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+database "Database" as DB
+
+Utilisateur -> Browser : Remplit le formulaire de connexion
+Browser -> Frontend : Envoie les identifiants
+activate Frontend
+Frontend -> Backend : POST /api/auth/login (email, password)
+activate Backend
+Backend -> DB : Vérifie les identifiants de l'utilisateur
+activate DB
+DB --> Backend : Retourne les informations de l'utilisateur
+deactivate DB
+alt Identifiants valides
+    Backend -> Backend : Génère un token d'authentification (JWT)
+    Backend --> Frontend : 200 OK (token)
+    deactivate Backend
+    Frontend -> Frontend : Stocke le token
+    Frontend --> Browser : Redirige vers le tableau de bord
+    deactivate Frontend
+    Browser --> Utilisateur : Affiche le tableau de bord
+else Identifiants invalides
+    Backend --> Frontend : 401 Unauthorized
+    deactivate Backend
+    Frontend --> Browser : Affiche un message d'erreur
+    deactivate Frontend
+    Browser --> Utilisateur : Affiche l'erreur
+end
+@enduml
+
+newpage
+
+@startuml
+title "Séquence: Recherche d'hôtels et consultation des détails (UC1, UC2)"
+
+actor Utilisateur
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+database "Database" as DB
+
+Utilisateur -> Browser : Saisit les critères de recherche (destination, dates)
+Browser -> Frontend : Envoie les critères de recherche
+activate Frontend
+
+Frontend -> Backend : GET /api/search/hotels?query=...
+activate Backend
+Backend -> DB : Recherche les hôtels correspondants
+activate DB
+DB --> Backend : Retourne la liste des hôtels
+deactivate DB
+Backend --> Frontend : 200 OK (liste des hôtels)
+deactivate Backend
+
+Frontend --> Browser : Affiche la liste des résultats
+deactivate Frontend
+
+Utilisateur -> Browser : Clique sur un hôtel
+Browser -> Frontend : Demande les détails de l'hôtel sélectionné
+activate Frontend
+
+Frontend -> Backend : GET /api/hotels/{hotel_id}
+activate Backend
+Backend -> DB : Récupère les détails de l'hôtel et les chambres
+activate DB
+DB --> Backend : Retourne les informations
+deactivate DB
+Backend --> Frontend : 200 OK (détails de l'hôtel)
+deactivate Backend
+
+Frontend --> Browser : Affiche la page de l'hôtel
+deactivate Frontend
+Browser --> Utilisateur : Montre les détails de l'hôtel et des chambres
+
+@enduml
+
+newpage
+
+@startuml
+title "Séquence: Réservation d'une chambre (UC5)"
+
+actor Utilisateur
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+database "Database" as DB
+
+' Assumption: User is on a hotel details page and is authenticated '
+Utilisateur -> Browser : Sélectionne une chambre et des dates, clique sur "Réserver"
+Browser -> Frontend : Envoie la demande de réservation (chambre_id, dates)
+activate Frontend
+
+Frontend -> Backend : POST /api/reservations/ (avec token d'auth)
+activate Backend
+Backend -> Backend : Valide le token et les données
+Backend -> DB : Vérifie la disponibilité de la chambre
+activate DB
+DB --> Backend : Chambre disponible
+deactivate DB
+Backend -> DB : Crée une nouvelle réservation (statut: PENDING)
+activate DB
+DB --> Backend : Confirme la création
+deactivate DB
+Backend --> Frontend : 201 Created (détails de la réservation)
+deactivate Backend
+
+Frontend --> Browser : Redirige vers la page de paiement ou de confirmation
+deactivate Frontend
+Browser --> Utilisateur : Affiche la confirmation et l'étape suivante
+
+@enduml
+
+newpage
+
+@startuml
+title "Séquence: Paiement d'une réservation (UC13)"
+
+actor Utilisateur
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+participant "Service de Paiement" as PaymentGateway
+database "Database" as DB
+
+' Assumption: User has a pending reservation and is on the payment page '
+Utilisateur -> Browser : Remplit les informations de paiement
+Browser -> Frontend : Envoie les détails de paiement
+activate Frontend
+
+Frontend -> PaymentGateway : Envoie la transaction
+activate PaymentGateway
+PaymentGateway --> Frontend : Confirme le paiement
+deactivate PaymentGateway
+
+Frontend -> Backend : PUT /api/reservations/{id}/confirm (avec token d'auth)
+activate Backend
+Backend -> DB : Met à jour le statut de la réservation à "CONFIRMED"
+activate DB
+DB --> Backend : Confirme la mise à jour
+deactivate DB
+Backend --> Frontend : 200 OK
+deactivate Backend
+
+Frontend --> Browser : Affiche la confirmation de réservation
+deactivate Frontend
+Browser --> Utilisateur : Affiche la page de succès
+
+@enduml
+
+newpage
+
+@startuml
+title "Séquence: Gestion des réservations par l'utilisateur (UC6)"
+
+actor Utilisateur
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+database "Database" as DB
+
+Utilisateur -> Browser : Accède à "Mes réservations"
+Browser -> Frontend : Demande la liste des réservations
+activate Frontend
+
+Frontend -> Backend : GET /api/reservations/me (avec token d'auth)
+activate Backend
+Backend -> DB : Récupère les réservations de l'utilisateur
+activate DB
+DB --> Backend : Retourne la liste
+deactivate DB
+Backend --> Frontend : 200 OK (liste des réservations)
+deactivate Backend
+
+Frontend --> Browser : Affiche les réservations
+deactivate Frontend
+
+' Optionnel : Annulation '
+Utilisateur -> Browser : Clique sur "Annuler" pour une réservation
+Browser -> Frontend : Envoie la demande d'annulation
+activate Frontend
+Frontend -> Backend : PUT /api/reservations/{id}/cancel (avec token d'auth)
+activate Backend
+Backend -> DB : Met à jour le statut à "CANCELED"
+activate DB
+DB --> Backend : Confirme
+deactivate DB
+Backend --> Frontend : 200 OK
+deactivate Backend
+Frontend --> Browser : Met à jour l'affichage
+deactivate Frontend
+
+@enduml
+
+newpage
+
+@startuml
+title "Séquence: Gestion d'un hôtel par le Manager (UC9 & UC10)"
+
+actor Manager
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+database "Database" as DB
+
+Manager -> Browser : Accède à son tableau de bord et choisit de modifier un hôtel
+Browser -> Frontend : Affiche le formulaire de l'hôtel avec les données existantes
+activate Frontend
+
+Manager -> Browser : Modifie les informations de l'hôtel (nom, description, etc.)
+Browser -> Frontend : Envoie les données mises à jour
+Frontend -> Backend : PUT /api/hotels/{hotel_id} (avec token d'auth)
+activate Backend
+Backend -> Backend : Valide le token et vérifie les permissions (est le propriétaire)
+Backend -> DB : Met à jour les informations de l'hôtel
+activate DB
+DB --> Backend : Confirme la mise à jour
+deactivate DB
+Backend --> Frontend : 200 OK (données de l'hôtel mises à jour)
+deactivate Backend
+
+Frontend --> Browser : Affiche un message de succès
+deactivate Frontend
+Browser --> Manager : Affiche la confirmation
+
+' De même pour la gestion des chambres (créer, modifier, supprimer) '
+' Le flux est similaire : Formulaire -> Frontend -> Backend -> DB '
+
+@enduml
+
+newpage
+
+@startuml
+title "Séquence: Gestion des réservations par le Manager (UC11)"
+
+actor Manager
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+database "Database" as DB
+
+Manager -> Browser : Accède au tableau de bord des réservations de son hôtel
+Browser -> Frontend : Demande la liste des réservations
+activate Frontend
+Frontend -> Backend : GET /api/hotels/{hotel_id}/reservations (avec token d'auth)
+activate Backend
+Backend -> DB : Récupère les réservations pour l'hôtel spécifié
+activate DB
+DB --> Backend : Retourne la liste
+deactivate DB
+Backend --> Frontend : 200 OK (liste des réservations)
+deactivate Backend
+Frontend --> Browser : Affiche la liste des réservations
+deactivate Frontend
+
+@enduml
+
+newpage
+
+@startuml
+title "Séquence: Gestion des utilisateurs par l'Admin (UC12)"
+
+actor Administrateur as Admin
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+database "Database" as DB
+
+Admin -> Browser : Accède au panneau d'administration des utilisateurs
+Browser -> Frontend : Demande la liste de tous les utilisateurs
+activate Frontend
+Frontend -> Backend : GET /api/users/ (avec token d'admin)
+activate Backend
+Backend -> DB : Récupère tous les utilisateurs
+activate DB
+DB --> Backend : Retourne la liste
+deactivate DB
+Backend --> Frontend : 200 OK (liste des utilisateurs)
+deactivate Backend
+Frontend --> Browser : Affiche la liste
+deactivate Frontend
+
+' Optionnel : Supprimer un utilisateur '
+Admin -> Browser : Clique sur "Supprimer" pour un utilisateur
+Browser -> Frontend : Envoie la demande de suppression
+activate Frontend
+Frontend -> Backend : DELETE /api/users/{user_id} (avec token d'admin)
+activate Backend
+Backend -> DB : Supprime l'utilisateur
+activate DB
+DB --> Backend : Confirme la suppression
+deactivate DB
+Backend --> Frontend : 204 No Content
+deactivate Backend
+Frontend --> Browser : Met à jour la liste des utilisateurs
+deactivate Frontend
+
+@enduml
+
+newpage
+
+@startuml
+title "Séquence: Gestion du profil par l'utilisateur (UC7)"
+
+actor Utilisateur
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+database "Database" as DB
+
+Utilisateur -> Browser : Accède à la page "Mon Profil"
+Browser -> Frontend : Demande les données du profil
+activate Frontend
+Frontend -> Backend : GET /api/users/me (avec token d'auth)
+activate Backend
+Backend -> DB : Récupère les informations de l'utilisateur
+activate DB
+DB --> Backend : Retourne les données
+deactivate DB
+Backend --> Frontend : 200 OK (données du profil)
+deactivate Backend
+Frontend --> Browser : Affiche le formulaire de profil pré-rempli
+deactivate Frontend
+
+Utilisateur -> Browser : Modifie ses informations et sauvegarde
+Browser -> Frontend : Envoie les données mises à jour
+activate Frontend
+Frontend -> Backend : PUT /api/users/me (avec token et nouvelles données)
+activate Backend
+Backend -> DB : Met à jour l'enregistrement de l'utilisateur
+activate DB
+DB --> Backend : Confirme la mise à jour
+deactivate DB
+Backend --> Frontend : 200 OK
+deactivate Backend
+Frontend --> Browser : Affiche un message de succès
+deactivate Frontend
+
+@enduml
+
+newpage
+
+@startuml
+title "Séquence: Mise à jour des Recommandations (implicite après recherche - UC8)"
+
+actor Utilisateur
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+participant "Moteur de Recommandation" as RecEngine
+database "Database" as DB
+
+Utilisateur -> Browser : Effectue une recherche ou consulte un hôtel
+Browser -> Frontend : Envoie la requête
+activate Frontend
+Frontend -> Backend : GET /api/search/hotels?query=...
+activate Backend
+' Le backend traite la recherche normalement '
+Backend -> DB : Recherche les hôtels
+DB --> Backend : Retourne les résultats
+note right of Backend : Parallèlement ou après, le backend notifie le moteur de recommandation.
+
+Backend -> RecEngine : log_user_activity(user_id, search_query/hotel_id)
+activate RecEngine
+RecEngine -> DB : Enregistre l'activité de l'utilisateur (préférences, historique)
+activate DB
+DB --> RecEngine : Confirme l'enregistrement
+deactivate DB
+deactivate RecEngine
+
+Backend --> Frontend : 200 OK (résultats de la recherche)
+deactivate Backend
+Frontend --> Browser : Affiche les résultats
+deactivate Frontend
+
+@enduml
+
+newpage
+
+@startuml
+title "Séquence: Obtenir des Recommandations (explicite - UC8)"
+
+actor Utilisateur
+participant "Navigateur" as Browser
+participant "Frontend (React)" as Frontend
+participant "Backend (Django)" as Backend
+participant "Moteur de Recommandation" as RecEngine
+database "Database" as DB
+
+Utilisateur -> Browser : Accède à la section "Recommandations"
+Browser -> Frontend : Demande les recommandations
+activate Frontend
+Frontend -> Backend : GET /api/recommendations/ (avec token d'auth)
+activate Backend
+
+Backend -> RecEngine : get_recommendations_for(user_id)
+activate RecEngine
+RecEngine -> DB : Récupère l'historique et les préférences de l'utilisateur
+activate DB
+DB --> RecEngine : Retourne l'historique
+deactivate DB
+
+RecEngine -> DB : Récupère les vecteurs des chambres/hôtels (embeddings)
+activate DB
+DB --> RecEngine : Retourne les vecteurs
+deactivate DB
+
+RecEngine -> RecEngine : Calcule les similarités et génère une liste de recommandations
+RecEngine --> Backend : Retourne la liste des hôtels/chambres recommandés
+deactivate RecEngine
+
+Backend --> Frontend : 200 OK (liste de recommandations)
+deactivate Backend
+Frontend --> Browser : Affiche les recommandations
+deactivate Frontend
+
+@enduml 

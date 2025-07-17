@@ -1,0 +1,114 @@
+:root {
+    --black: #333;
+    --grey: #767268;
+    --light-grey: #7d8da1;
+    --white: #fefefe;
+    --extra-light: #eff0f3;
+    --yellow: #ffdd00;
+    --blue: #0b3e66;
+    --light-blue: #379deb;
+    --max-width: 1200px;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.payment-container-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--extra-light);
+    padding: 25px;
+}
+
+.payment-container-form form {
+    width: 700px;
+    padding: 40px;
+    margin: 50px;
+    background: var(--white);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-container-form form .row {
+    position: relative;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.payment-container-form form .row .close-payment{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.2rem;
+    color: var(--black);
+}
+
+.payment-container-form .row .column {
+    flex: 1 1 250px;
+}
+
+.payment-container-form .column .title {
+    font-size: 20px;
+    color: var(--black);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.payment-container-form .column .input-box {
+    margin: 15px 0;
+}
+
+.payment-container-form .input-box span {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.payment-container-form .input-box input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--grey);
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.payment-container-form .column .flex {
+    display: flex;
+    gap: 15px;
+}
+
+.payment-container-form .flex .input-box {
+    margin-top: 5px;
+}
+
+.payment-container-form .input-box img {
+    height: 34px;
+    margin-top: 5px;
+    filter: drop-shadow(0 0 1px var(--black));
+}
+
+.payment-container-form .buttons{
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    padding: 0 3rem;
+}
+
+.payment-container-form form .btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--yellow);
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-size: 17px;
+    color: var(--black);
+    margin-top: 5px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.payment-container-form form .btn:hover {
+    background: var(--yellow);
+}

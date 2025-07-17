@@ -1,0 +1,104 @@
+.hotel-rec-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.10);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.hotel-rec-card:hover {
+    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.18);
+    transform: translateY(-4px) scale(1.02);
+}
+
+.badge-popular {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #e44d26;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 4px 12px;
+    border-radius: 8px;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+}
+
+.hotel-rec-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+.hotel-rec-content {
+    padding: 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hotel-rec-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+    color: #0b3e66;
+}
+
+.hotel-rec-location {
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.hotel-rec-meta {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.hotel-rec-rating {
+    color: #ffd000;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.hotel-rec-price {
+    color: #e44d26;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.hotel-rec-btn {
+    background: #0b3e66;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+
+.hotel-rec-btn:hover {
+    background: #e44d26;
+}
+
+@media (max-width: 600px) {
+    .hotel-rec-image {
+        height: 120px;
+    }
+
+    .hotel-rec-content {
+        padding: 0.8rem;
+    }
+}

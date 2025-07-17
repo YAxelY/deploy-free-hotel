@@ -1,0 +1,344 @@
+:root{
+    --black: #333;
+    --grey: #767268;
+    --light-grey: #7d8da1;
+    --white: #fefefe;
+    --extra-light: #eff0f3;
+    --yellow: #ffd000;
+    --blue: #0b3e66;
+    --light-blue: #379deb;
+    --danger: #ff7782;
+    --success: #41f1b6;
+    --blue-sidebar: #d1f1fd;
+    --color-light: rgba(24, 127, 205, 0.1);
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+    --max-width: 1200px;
+    --box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    --box-shadow-1: 0 2rem 3rem var(--color-light);
+}
+
+.aside{
+    font-size: 0.88rem;
+    color: var(--black);
+    width: 100vw;
+    background: var(--white);
+    user-select: none;
+    overflow: hidden;
+}
+
+.aside .container{
+    display: block;
+    width: 100%;
+    margin: 0;
+    gap: 3rem;
+    grid-template-columns: 14rem auto 23rem;
+}
+
+.aside img{
+    display: block;
+    width: 100%;
+}
+
+.aside h1{
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+.aside h2{
+    font-size: 1.4rem;
+}
+
+.aside h3{
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+.aside h4{
+    font-size: 0.8rem;
+}
+
+.aside h5{
+    font-size: 0.77rem;
+}
+
+.aside small{
+    font-size: 0.75rem;
+}
+
+.aside .profile-photo{
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.aside .text-muted{
+    color: var(--light-grey);
+}
+
+.aside p{
+    color: var(--black);
+}
+
+.aside b{
+    color: var(--grey);
+}
+
+.aside .primary{
+    color: var(--light-blue);
+}
+
+.aside .danger{
+    color: var(--danger);
+}
+
+.aside .success{
+    color: var(--success);
+}
+
+.aside .warning{
+    color: var(--yellow);
+}
+
+
+
+/* ------------------------------ SIDEBAR ------------------------------- */
+
+aside.sidebar-component{
+    z-index: 1000;
+    height: 100vh;
+    transition: width 0.3s ease-in-out;
+    background: var(--blue-sidebar);
+    box-shadow: var(--box-shadow);
+    position: fixed;
+}
+
+aside.expanded{
+    width: 250px
+}
+
+aside.collapsed {
+    width: 80px;
+}
+
+aside .top{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.4rem;
+}
+
+aside .top .logo{
+    display: flex;
+    gap: 0.8rem;
+    padding: 0 1rem;
+}
+
+aside .top .logo .fa-hotel{
+    color: var(--light-blue);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+aside .top .logo span{
+    color: var(--black);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+#toggle-btn{
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(-50%, -50%); 
+    font-size: 1rem;
+    color: var(--light-grey);
+    background: var(--blue-sidebar);
+    box-shadow: var(--box-shadow);
+    padding: 0.5rem;
+    border-radius: 30%;
+    cursor: pointer;
+    z-index: 1002;
+}
+
+/* Sidebar */
+aside .sidebar {
+    height: 89%;
+    top: 2rem;
+    left: 0;
+    bottom: 0;
+    padding: 1rem 0;
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+    overflow-x: hidden;
+}
+
+aside .side-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+aside .sidebar .side-links .side-list {
+    width: 100%;
+    padding: 0 1rem;
+}
+
+aside .sidebar .side-links .side-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar .side-links .side-link span {
+    font-size: 1rem;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    color: var(--light-grey);
+}
+
+aside .sidebar .side-links .side-link h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
+    flex-grow: 1;
+    color: var(--light-grey);
+}
+
+#message-count {
+    background: var(--danger);
+    color: var(--white);
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+/* Make sure spans only appear when expanded */
+aside .sidebar.collapsed .side-link h3,
+aside .sidebar.collapsed .logo span {
+  display: none;
+}
+
+/* Active state */
+
+aside .sidebar .side-links .side-link.active span,
+aside .sidebar .side-links .side-link.active h3 {
+    color: var(--light-blue);
+}
+
+/* Hover effects */
+aside .sidebar .side-links .side-link:hover {
+    transform: translateX(5px);
+    color: var(--light-blue);
+}
+
+/* Scrollbar styling */
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+/* Special styling for bottom items */
+.bottom{
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+}
+
+#settings {
+    margin-bottom: 3rem;
+    color: var(--light-grey);
+}
+
+#log-out{
+    color: var(--danger);
+}
+
+
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .aside{
+        overflow: visible;
+    }
+
+    .aside .container{
+        margin-left: 0;
+    }
+
+    aside.sidebar-component {
+        left: 0;
+        transition: left 0.3s ease-in-out;
+    }
+    
+    aside.sidebar-component.expanded {
+        left: 0;
+        width: 250px;
+    }
+    
+    aside.sidebar-component.collapsed {
+        left: 0;
+    }
+    
+    aside.sidebar-component.expanded::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 250px;
+        background: rgba(0,0,0,0.05);
+        z-index: 999;
+    }
+
+}
+
+/* For desktop behavior */
+@media screen and (min-width: 769px) {
+    aside.sidebar-component {
+        position: fixed;
+        left: 0;
+        height: 100vh;
+    }
+    
+    .container {
+        margin-left: 80px; /* Default collapsed width */
+        transition: margin-left 0.3s ease-in-out;
+    }
+    
+    aside.sidebar-component.expanded ~ .container {
+        margin-left: 250px; /* Expanded width */
+    }
+}
+
+
+
+
+

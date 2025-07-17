@@ -1,0 +1,43 @@
+@startuml
+left to right direction
+actor "Client" as client
+actor "Utilisateur" as user
+actor "Manager" as manager
+actor "Administrateur" as admin
+
+rectangle "FreeHotel System" {
+  usecase "Rechercher des hôtels" as UC1
+  usecase "Voir les détails d'un hôtel" as UC2
+  usecase "S'inscrire" as UC3
+  usecase "Se connecter" as UC4
+  usecase "Réserver une chambre" as UC5
+  usecase "Gérer ses réservations" as UC6
+  usecase "Gérer son profil" as UC7
+  usecase "Obtenir des recommandations" as UC8
+  usecase "Gérer les hôtels" as UC9
+  usecase "Gérer les chambres" as UC10
+  usecase "Gérer les réservations d'hôtel" as UC11
+  usecase "Gérer les utilisateurs" as UC12
+  usecase "Payer sa réservation" as UC13
+}
+
+client --|> user
+
+user -- UC1
+user -- UC2
+user -- UC3
+user -- UC4
+
+user -- UC5
+user -- UC6
+user -- UC7
+user -- UC8
+user -- UC13
+
+manager -- UC9
+manager -- UC10
+manager -- UC11
+
+admin -- UC12
+
+@enduml 

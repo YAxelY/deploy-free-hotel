@@ -1,0 +1,125 @@
+.room-rec-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.10);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.room-rec-card:hover {
+    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.18);
+    transform: translateY(-4px) scale(1.02);
+}
+
+.badge-recommended {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #ffd000;
+    color: #0b3e66;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 4px 12px;
+    border-radius: 8px;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+}
+
+.room-rec-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+.room-rec-content {
+    padding: 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.room-rec-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+    color: #0b3e66;
+}
+
+.room-rec-hotel {
+    color: #222;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.room-rec-location {
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.room-rec-meta {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.room-rec-rating {
+    color: #ffd000;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.room-rec-price {
+    color: #e44d26;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.room-rec-btn {
+    background: #0b3e66;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.room-rec-btn:hover {
+    background: #e44d26;
+}
+
+.room-rec-btn-alt {
+    background: #ffd000;
+    color: #0b3e66;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.room-rec-btn-alt:hover {
+    background: #0b3e66;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .room-rec-image {
+        height: 120px;
+    }
+
+    .room-rec-content {
+        padding: 0.8rem;
+    }
+}

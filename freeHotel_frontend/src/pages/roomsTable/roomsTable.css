@@ -1,0 +1,207 @@
+:root{
+    --black: #333;
+    --grey: #767268;
+    --light-grey: #7d8da1;
+    --white: #fefefe;
+    --extra-light: #eff0f3;
+    --yellow: #ffd000;
+    --blue: #0b3e66;
+    --light-blue: #379deb;
+    --danger: #ff7782;
+    --success: #41f1b6;
+    --blue-sidebar: #d1f1fd;
+    --color-light: rgba(24, 127, 205, 0.1);
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+    --max-width: 1200px;
+    --box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    --box-shadow-1: 0 2rem 3rem var(--color-light);
+}
+
+
+.roomsTable {
+    font-size: 0.88rem;
+    color: var(--black);
+    width: 100vw;
+    min-height: 100vh;
+    background: var(--extra-light);
+    user-select: none;
+    overflow-x: hidden;
+}
+
+.roomsTable .container {
+    position: relative;
+    padding-right: 1rem;
+    width: auto;
+    margin-left: 280px;
+    transition: all 0.3s ease;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+.roomsTable .container.collapsed {
+    width: auto;
+    margin-left: 80px;
+    transition: all 0.3s ease;
+}
+
+
+
+
+
+/* ------------------------------ MAIN SECTION ------------------------------- */
+
+.roomsTable main .section-header {
+    text-align: left;
+    margin-top: 2rem;
+}
+
+.roomsTable main .date {
+    display: inline-block;
+    background: var(--extra-light-green);
+    border-radius: var(--border-radius-1);
+    margin-top: 1rem;
+    padding: 0.5rem 1.6rem;
+}
+
+.roomsTable main .date input[type="date"] {
+    background: transparent;
+    color: var(--black);
+    border: none;
+    outline: none;
+}
+
+
+
+#roomsTable main .table-data {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    color: var(--black);
+}
+
+#roomsTable main .table-data>div {
+    border-radius: 20px;
+    background: var(--white);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+#roomsTable main .table-data .head {
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+    margin-bottom: 24px;
+}
+
+#roomsTable main .table-data .head h3 {
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#roomsTable main .table-data .head span {
+    cursor: pointer;
+    color: var(--green);
+    margin-left: 1rem;
+}
+
+#roomsTable main .table-data .order {
+    flex-grow: 1;
+    flex-basis: 500px;
+}
+
+#roomsTable main .table-data .order table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#roomsTable main .table-data .order table th {
+    padding: 12px 16px;
+    font-size: 13px;
+    text-align: left;
+    border-bottom: 1px solid var(--extra-light);
+}
+
+#roomsTable main .table-data .order table td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#roomsTable main .table-data .order table tr td:first-child {
+    display: flex;
+    align-items: center;
+    grid-gap: 12px;
+    padding-left: 6px;
+}
+
+#roomsTable main .table-data .order table td img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#roomsTable main .table-data .order table tbody tr:hover {
+    background: var(--extra-light);
+}
+
+
+
+/* MAIN */
+/* CONTENT */
+
+.empty-table-message {
+    text-align: center;
+    color: var(--grey);
+    padding: 2rem !important;
+    font-style: italic;
+}
+
+@media screen and (max-width: 768px) {
+    #roomsTable {
+        width: 100vw;
+        height: 100vh;
+        left: 200px;
+    }
+
+    #roomsTable main .table-data .head {
+        min-width: 420px;
+    }
+
+    #roomsTable main .table-data .order table {
+        min-width: 420px;
+    }
+}
+
+
+
+@media screen and (max-width: 576px) {
+
+    #roomsTable main .box-info {
+        grid-template-columns: 1fr;
+    }
+
+    #roomsTable main .table-data .head {
+        min-width: 420px;
+    }
+
+    #roomsTable main .table-data .order table {
+        min-width: 420px;
+    }
+
+    #roomsTable main .table-data .todo .todo-list {
+        min-width: 420px;
+    }
+}
+

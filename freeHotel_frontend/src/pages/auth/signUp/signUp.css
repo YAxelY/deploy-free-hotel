@@ -1,0 +1,80 @@
+:root{
+    --black: #333;
+    --light-grey: #767268;
+    --white: #fefefe;
+    --extra-light: #eee;
+    --yellow: #ffdd00;
+    --blue: #0b3e66;
+    --light-blue: #187fcd;
+    --box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.signUp-form-container{
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 10000;
+    min-height: 100vh;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signUp-form-container form{
+    margin: 2rem;
+    padding: 1.5rem 2rem;
+    border-radius: .5rem;
+    background-color: var(--white);
+    width: 50rem;
+}
+
+.signUp-form-container form :is(.section-header){
+    text-align: center;
+    margin-inline: auto;
+}
+
+.signUp-content .radio-container{
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.signUp-content .radio-container label{
+    display: flex;
+    gap: 1rem;
+}
+
+.signUp-content .radio-container input[type="radio"]{
+    accent-color: var(--light-blue);
+}
+
+.signUp-content .radio-container label span{
+    font-size: 1.2rem;
+}
+
+.signUp-content .buttons{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3rem;
+}
+
+.signUp-content .link{
+    text-decoration: none;
+}
+
+.signUp-content .form-link p{
+    padding: .5rem 0;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--grey);
+}
+
+.signUp-content .form-link p span{
+    color: var(--light-blue);
+}
+
+.signUp-content .form-link p span:hover{
+    text-decoration: underline;
+}
+

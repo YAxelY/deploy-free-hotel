@@ -1,0 +1,308 @@
+:root{
+    --black: #333;
+    --grey: #767268;
+    --light-grey: #7d8da1;
+    --white: #fefefe;
+    --extra-light: #eff0f3;
+    --yellow: #ffd000;
+    --blue: #0b3e66;
+    --light-blue: #379deb;
+    --danger: #ff7782;
+    --success: #41f1b6;
+    --blue-sidebar: #d1f1fd;
+    --color-light: rgba(24, 127, 205, 0.1);
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+    --max-width: 1200px;
+    --box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    --box-shadow-1: 0 2rem 3rem var(--color-light);
+}
+
+
+.reservation {
+	font-size: 0.88rem;
+	color: var(--black);
+	width: 100vw;
+	min-height: 100vh;
+	background: var(--extra-light);
+	user-select: none;
+	overflow: hidden;
+}
+
+.reservation .container {
+	position: relative;
+	padding-right: 1rem;
+	width: auto;
+	margin-left: 280px;
+	transition: all 0.3s ease;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+
+.reservation .container.collapsed {
+	width: auto;
+	margin-left: 80px;
+	transition: all 0.3s ease;
+}
+
+
+.reservation img {
+	display: block;
+	width: 100%;
+}
+
+
+
+
+/* ------------------------------ MAIN SECTION ------------------------------- */
+
+.reservation main :is(.section-header) {
+	text-align: left;
+	margin-top: 2rem;
+}
+
+.reservation main .date {
+	display: inline-block;
+	background: var(--extra-light-green);
+	border-radius: var(--border-radius-1);
+	margin-top: 1rem;
+	padding: 0.5rem 1.6rem;
+}
+
+.reservation main .date input[type="date"] {
+	background: transparent;
+	color: var(--black);
+	border: none;
+	outline: none;
+}
+
+
+
+#reservation main .table-data {
+	display: flex;
+	flex-wrap: wrap;
+	grid-gap: 24px;
+	margin-top: 24px;
+	width: 100%;
+	color: var(--black);
+}
+
+#reservation main .table-data>div {
+	border-radius: 20px;
+	background: var(--white);
+	padding: 24px;
+	overflow-x: auto;
+}
+
+#reservation main .table-data .head {
+	display: flex;
+	align-items: center;
+	grid-gap: 16px;
+	margin-bottom: 24px;
+}
+
+#reservation main .table-data .head h3 {
+	margin-right: auto;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+#reservation main .table-data .head span {
+	cursor: pointer;
+	color: var(--green)
+}
+
+#reservation main .table-data .order {
+	flex-grow: 1;
+	flex-basis: 500px;
+}
+
+#reservation main .table-data .order table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#reservation main .table-data .order table th {
+	padding-bottom: 12px;
+	font-size: 13px;
+	text-align: left;
+	border-bottom: 1px solid var(--extra-light);
+}
+
+#reservation main .table-data .order table td {
+	padding: 16px 0;
+}
+
+#reservation main .table-data .order table tr td:first-child {
+	display: flex;
+	align-items: center;
+	grid-gap: 12px;
+	padding-left: 6px;
+}
+
+#reservation main .table-data .order table td img {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+#reservation main .table-data .order table tbody tr:hover {
+	background: var(--extra-light);
+}
+
+#reservation main .table-data .order table tr td .status {
+	font-size: 10px;
+	padding: 6px 16px;
+	color: var(--white);
+	border-radius: 20px;
+	font-weight: 700;
+}
+
+#reservation main .table-data .order table tr td .status.completed {
+	background: var(--light-green);
+}
+
+#reservation main .table-data .order table tr td .status.process {
+	background: var(--yellow);
+}
+
+#reservation main .table-data .order table tr td .status.pending {
+	background: var(--orange);
+}
+
+
+#reservation main .table-data .todo {
+	flex-grow: 1;
+	flex-basis: 300px;
+}
+
+#reservation main .table-data .todo .todo-list {
+	width: 100%;
+}
+
+#reservation main .table-data .todo .todo-list li {
+	width: 100%;
+	margin-bottom: 16px;
+	background: var(--extra-light);
+	border-radius: 10px;
+	padding: 14px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#reservation main .table-data .todo .todo-list li span {
+	cursor: pointer;
+}
+
+#reservation main .table-data .todo .todo-list li.completed {
+	border-left: 10px solid var(--light-green);
+}
+
+#reservation main .table-data .todo .todo-list li.not-completed {
+	border-left: 10px solid var(--orange);
+}
+
+#reservation main .table-data .todo .todo-list li:last-child {
+	margin-bottom: 0;
+}
+
+/* MAIN */
+/* CONTENT */
+
+
+@media screen and (max-width: 768px) {
+
+	#reservation {
+		width: 100vw;
+		height: 100vh;
+		left: 200px;
+	}
+
+}
+
+
+
+@media screen and (max-width: 576px) {
+
+	#reservation main .box-info {
+		grid-template-columns: 1fr;
+	}
+
+	#reservation main .table-data .head {
+		min-width: 420px;
+	}
+
+	#reservation main .table-data .order table {
+		min-width: 420px;
+	}
+
+	#reservation main .table-data .todo .todo-list {
+		min-width: 420px;
+	}
+}
+
+.search-bar {
+	margin: 1rem 0;
+	padding: 0.5rem;
+}
+
+.search-bar input {
+	width: 100%;
+	padding: 0.8rem;
+	border: 1px solid var(--green);
+	border-radius: 8px;
+	font-size: 1rem;
+	transition: border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+	outline: none;
+	border-color: var(--blue);
+}
+
+.table-actions {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+
+.table-actions span {
+	cursor: pointer;
+	padding: 0.5rem;
+	border-radius: 50%;
+	transition: background-color 0.3s ease;
+}
+
+.table-actions span:hover {
+	background-color: var(--orange);
+}
+
+.loading-message,
+.error-message,
+.empty-message {
+	text-align: center;
+	padding: 2rem;
+	font-size: 1rem;
+}
+
+.loading-message {
+	color: var(--grey);
+}
+
+.error-message {
+	color: var(--danger);
+}
+
+.empty-message {
+	color: var(--grey);
+	font-style: italic;
+}
